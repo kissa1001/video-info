@@ -2,13 +2,15 @@
   "name": "videoinfo",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "electron": "electron ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.7.9"
+    "bulma": "^0.6.1",
+    "electron": "^1.7.9",
+    "fluent-ffmpeg": "^2.1.2"
   }
 }

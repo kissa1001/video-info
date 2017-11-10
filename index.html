@@ -4,9 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+  <title>Video Info</title>
 </head>
 <body>
-  
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title has-text-centered">Video Info</h1>
+        <form>
+          <div class="field">
+            <div class="file is-primary is-fullwidth is-boxed">
+              <label class="file-label">
+                <input class="file-input" type="file" accept="video/*" name="video" />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <i class="fa fa-cloud-upload"></i>
+                  </span>
+                  <span class="file-label has-text-centered">
+                    Select a video…
+                  </span>
+                </span>
+                <span class="file-name" id="file-name"></span>
+              </label>
+            </div>
+          </div>
+          <div class="control">
+            <button type="submit" class="button is-danger is-fullwidth">Get length!</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const inputElement = document.querySelector("input");
+    inputElement.addEventListener("change", handleFiles, false);
+    function handleFiles() {
+      const file = this.files[0];
+      document.getElementById("file-name").innerHTML = file.name;
+    }
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const file = inputElement.files[0];
+    })
+  </script>
 </body>
 </html>
