@@ -7,7 +7,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
   <title>Video Info</title>
+  <style>
+    .subtitle {
+      margin-top: 50px;
+    }
+  </style>
 </head>
+
 <body>
   <section class="hero">
     <div class="hero-body">
@@ -34,20 +40,29 @@
             <button type="submit" class="button is-danger is-fullwidth">Get length!</button>
           </div>
         </form>
+        <h2 class="subtitle has-text-centered" id="result"></h2>
       </div>
     </div>
   </div>
 
   <script>
+    const electron = require('electron');
+    const { ipcRenderer } = electron;
     const inputElement = document.querySelector("input");
+
     inputElement.addEventListener("change", handleFiles, false);
     function handleFiles() {
-      const file = this.files[0];
-      document.getElementById("file-name").innerHTML = file.name;
+      document.getElementById("file-name").innerHTML = this.files[0].name;
     }
+
     document.querySelector('form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const file = inputElement.files[0];
+      const { path } = inputElement.files[0];
+      ipcRenderer.send('video:submit', path)
+    })
+
+    ipcRenderer.on('video:duration', (e, duration) => {
+      document.getElementById('result').innerHTML = `Video is ${duration} seconds`;
     })
   </script>
 </body>
